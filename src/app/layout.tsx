@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Epilogue } from "next/font/google";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -12,6 +13,7 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const epilogue = Epilogue({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -26,7 +28,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${epilogue.className} ${
+          process.env.NODE_ENV == "development" ? "debug-screens" : ""
+        } antialiased`}
       >
         {children}
       </body>
